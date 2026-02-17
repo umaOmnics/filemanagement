@@ -11,7 +11,7 @@ use Omnics\FileManagement\Http\Controllers\FileManager\FileController;
 | CRUD Operations of the FILES
 */
 
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'files'], function () {
+Route::group(['prefix' => 'files'], function () {
 
     Route::post('massDelete',[FileController::class, 'massDelete'])->name('files.massDelete');
 

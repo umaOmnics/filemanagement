@@ -12,7 +12,7 @@ use Omnics\FileManagement\Http\Controllers\FileManager\FolderController;
 | CRUD Operations of the FOLDERS
 */
 
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'folders'], function () {
+Route::group(['prefix' => 'folders'], function () {
 
     Route::post('index/{folder_id?}',[FolderController::class, 'index'])->name('folders.index');
 
