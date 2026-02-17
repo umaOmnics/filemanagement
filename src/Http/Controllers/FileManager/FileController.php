@@ -28,7 +28,7 @@ class FileController extends Controller
     }
 
     /**
-     * Upload single or multiple files.
+     * Upload single or multiple files...
      *
      * This endpoint handles:
      * - Single file upload
