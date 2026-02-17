@@ -11,28 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('files');
+        if(Schema::hasTable('files')){
+            Schema::dropIfExists('files');
 
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('folders_id')->nullable();
-            $table->text('title');
-            $table->text('original_name');
-            $table->unsignedBigInteger('size')->nullable();
-            $table->string('mime')->nullable();
-            $table->longText('path')->nullable();
-            $table->longText('source_text')->nullable();
-            $table->longText('checksum_sha256')->nullable();
-            $table->string('visibility')->default('public');
-            $table->unsignedBigInteger('duration')->nullable();
-            $table->json('meta_data')->nullable();
+            Schema::create('files', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('folders_id')->nullable();
+                $table->text('title');
+                $table->text('original_name');
+                $table->unsignedBigInteger('size')->nullable();
+                $table->string('mime')->nullable();
+                $table->longText('path')->nullable();
+                $table->longText('source_text')->nullable();
+                $table->longText('checksum_sha256')->nullable();
+                $table->string('visibility')->default('public');
+                $table->unsignedBigInteger('duration')->nullable();
+                $table->json('meta_data')->nullable();
 
-            $table->timestamps();
-            $table->softDeletes();
+                $table->timestamps();
+                $table->softDeletes();
 
-            $table->foreign('folders_id')->references('id')->on('folders')
-                ->onDelete('set null')->onUpdate('cascade');
-        });
+                $table->foreign('folders_id')->references('id')->on('folders')
+                    ->onDelete('set null')->onUpdate('cascade');
+            });
+        }
     }
 
     /**

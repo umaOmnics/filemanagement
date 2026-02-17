@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('tags');
+        if(!Schema::hasTable('tags')){
+            Schema::dropIfExists('tags');
 
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->string('module')->nullable();
-            $table->string('name');
-            $table->string('color')->default('#ADD8E6');
-            $table->timestamps();
-        });
+            Schema::create('tags', function (Blueprint $table) {
+                $table->id();
+                $table->string('module')->nullable();
+                $table->string('name');
+                $table->string('color')->default('#ADD8E6');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

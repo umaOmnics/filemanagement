@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('folders');
+        if(!Schema::hasTable('folders')){
+            Schema::dropIfExists('folders');
 
-        Schema::create('folders', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->string('name');
-            $table->json('created_by')->nullable();
-            $table->boolean('is_private')->default(0);
-            $table->longText('description')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+            Schema::create('folders', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('parent_id')->nullable();
+                $table->string('name');
+                $table->json('created_by')->nullable();
+                $table->boolean('is_private')->default(0);
+                $table->longText('description')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
     }
 
     /**

@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('files_entities');
+        if(!Schema::hasTable('files_entities')){
+            Schema::dropIfExists('files_entities');
 
-        Schema::create('files_entities', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('files_id');
-            $table->string('entity_type');
-            $table->unsignedBigInteger('entity_id');
-            $table->timestamps();
+            Schema::create('files_entities', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('files_id');
+                $table->string('entity_type');
+                $table->unsignedBigInteger('entity_id');
+                $table->timestamps();
 
-            $table->foreign('files_id')->references('id')->on('files')
-                ->onDelete('cascade')->onUpdate('cascade');
-        });
+                $table->foreign('files_id')->references('id')->on('files')
+                    ->onDelete('cascade')->onUpdate('cascade');
+            });
+        }
     }
 
     /**
