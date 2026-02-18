@@ -12,8 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         if(!Schema::hasTable('files_entities')){
-            Schema::dropIfExists('files_entities');
-
             Schema::create('files_entities', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('files_id');

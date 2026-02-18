@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasTable('files')){
-            Schema::dropIfExists('files');
-
+        if(!Schema::hasTable('files')) {
             Schema::create('files', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('folders_id')->nullable();
                 $table->text('title');
                 $table->text('original_name');
+                $table->text('object_key');
+                $table->boolean('is_entity')->default(0);
                 $table->unsignedBigInteger('size')->nullable();
                 $table->string('mime')->nullable();
                 $table->longText('path')->nullable();

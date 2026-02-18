@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasColumn('files', 'object_key')) {
+        if ( (Schema::hasTable('files')) && (Schema::hasColumn('files', 'object_key'))) {
             Schema::table('files', function (Blueprint $table) {
                 $table->dropColumn(['object_key', 'is_entity']);
             });

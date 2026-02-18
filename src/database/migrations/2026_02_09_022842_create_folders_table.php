@@ -12,8 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         if(!Schema::hasTable('folders')){
-            Schema::dropIfExists('folders');
-
             Schema::create('folders', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('parent_id')->nullable();
